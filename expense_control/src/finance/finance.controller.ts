@@ -1,6 +1,5 @@
-import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Res } from '@nestjs/common';
 import { create } from 'domain';
-import { response } from 'express';
 import { UsersService } from 'src/users/users.service';
 
 
@@ -9,7 +8,7 @@ export class FinanceController {
     constructor(private readonly usersService: UsersService){}
 
 @Get()
-findAll(@Res()response){
+findAll(){
     return this.usersService.findAll();
 }
 @Get(':id')
@@ -20,6 +19,17 @@ findOne(@Param('id') id:string){
 @Post()
 create(@Body()body){
     return this.usersService.create(body)
+}
+
+@Patch(':id')
+update(@Param('id')id:string, @Body() body){
+
+    return this.usersService.update(id,body);
+}
+
+@Delete(':id')
+remove(@Param('id') id: string) {
+    return this.usersService.remove(id)
 }
 
 }

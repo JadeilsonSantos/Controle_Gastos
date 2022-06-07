@@ -16,16 +16,19 @@ export class UsersService {
       return this.users;
   }
   findOne(id:string){
-      return this.users,find((user:User) => user.id===Number(id));
+      return this.users.find((user:User) => user.id===Number(id));
   }
   create(createUserDto:any){
       this.users.push(createUserDto);
   }
-  update(id: string, updateUserDto: any){
-      const indexUser = this.users.findIndex(
-          (user:User)=> user.id===Number(id),
+  update(id: string, updateUserDto: any){  
+    const indexUser = this.users.findIndex(
+          (user:User) => user.id=== Number(id),
       );
-      this.users[indexUser] = updateUserDto;
+        let userFound =  this.users[indexUser];
+        updateUserDto = Object.assign(userFound, updateUserDto)
+        userFound = updateUserDto;
+
   }
   remove(id:string){
       const indexUser = this.users.findIndex(
