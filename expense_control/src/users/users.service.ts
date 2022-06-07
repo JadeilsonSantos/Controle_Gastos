@@ -25,12 +25,14 @@ export class UsersService {
     const indexUser = this.users.findIndex(
           (user:User) => user.id=== Number(id),
       );
-        let userFound =  this.users[indexUser];
+    let userFound =  this.users[indexUser];
+    let userName = this.users[indexUser].name
         updateUserDto = Object.assign(userFound, updateUserDto)
         userFound = updateUserDto;
+      return `Usuário ${userName} Atualizado com sucesso!`  
 
   }
-  remove(id:string){
+  remove(id:string): void{
       const indexUser = this.users.findIndex(
           (user:User)=> user.id===Number(id),
       );
